@@ -12,5 +12,10 @@ jobs:
       - name: Checkout actions
         uses: actions/checkout@v3
       - run: cat test.sh
-      - run: ./test.sh
+      - run: echo abc >> test.sh
+  test2:
+    runs-on: ubuntu-latest
+    need: test1
+    steps:
+      - run: cat test.sh
 
