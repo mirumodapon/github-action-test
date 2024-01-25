@@ -1,0 +1,14 @@
+name: Pull Request
+on:
+  push:
+    branches:
+      - main
+
+
+jobs:
+  test1:
+    runs-on: ubuntu-latest
+    steps:
+      - run: cat test.sh
+      - run: ./test.sh
+
