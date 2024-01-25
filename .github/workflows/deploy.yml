@@ -9,6 +9,8 @@ jobs:
   test1:
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout actions
+        uses: actions/checkout@v3
       - run: cat test.sh
       - run: ./test.sh
 
