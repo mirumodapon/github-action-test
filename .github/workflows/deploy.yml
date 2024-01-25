@@ -15,7 +15,7 @@ jobs:
       - run: echo abc >> test.sh
   test2:
     runs-on: ubuntu-latest
-    need: test1
+    needs: test1
     steps:
       - run: cat test.sh
 
