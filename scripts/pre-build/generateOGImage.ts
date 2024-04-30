@@ -134,7 +134,14 @@ function drawTag(ctx: CanvasRenderingContext2D, tag: string, x: number, y: numbe
 
 
 async function generateSessionImage(session: Session,typeById: SomethingById,nameById: SomethingById): Promise<void> {
-  const outputPath = path.resolve(__dirname, '../../public/images/sessions', `${session.id}.png`);
+  const dirPath = path.resolve(__dirname, '../../public/images/sessions');
+  // Check if the directory exists, if not, create it
+  if (!fs.existsSync(dirPath)) {
+    fs.mkdirSync(dirPath, { recursive: true });
+    console.log(`Directory created at ${dirPath}`);
+  }
+
+  const outputPath = path.join(dirPath, `${session.id}.png`);
   // check if the picture exists
   if (fs.existsSync(outputPath)) {
     // console.log(`Image for session ${session.id} already exists at ${outputPath}. Skipping generation.`);
