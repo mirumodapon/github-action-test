@@ -6,7 +6,7 @@ import { camelCase } from 'lodash-es'
 import { createModuleHook } from '../utils'
 import ogImageSrc from '@/assets/images/og.png'
 
-type MetaType = 'lang' | 'title' | 'description' | 'ogUrl' | 'ogImage' | 'ogType' | 'ogSiteName'
+type MetaType = 'lang' | 'title' | 'description' | 'ogUrl' | 'ogImage' | 'ogType' | 'ogSiteName' | 'ogTitle'
 type MetaValues = Record<MetaType, string>
 export type MetaOptions = Partial<MetaValues>
 type UseMetas = Record<MetaType, Ref<string>> & {
@@ -25,6 +25,7 @@ const _useMetas = (): UseMetas => {
     title: `COSCUP ${import.meta.env.VITE_YEAR} | Conference for Open Source Coders, Users, and Promoters`,
     description: 'Conference for Open Source Coders, Users, and Promoters is a free annual conference providing a platform to connect FLOSS folks across Asia since 2006. It\'s a major force of free software movement advocacy in Taiwan.',
     ogUrl: `https://coscup.org/${import.meta.env.VITE_BASE_URL}`,
+    ogTitle:"COSCUP",
     ogImage: ogImageSrc,
     ogType: 'website',
     ogSiteName: `COSCUP ${import.meta.env.VITE_YEAR}`
@@ -42,6 +43,7 @@ const _useMetas = (): UseMetas => {
       }
     }),
     description: ref(defaultMetaValues.description),
+    ogTitle: ref(defaultMetaValues.ogTitle),
     ogUrl: ref(defaultMetaValues.ogUrl),
     ogImage: ref(defaultMetaValues.ogImage),
     ogType: ref(defaultMetaValues.ogType),
@@ -61,7 +63,7 @@ const _useMetas = (): UseMetas => {
     setMetas(defaultMetaValues)
   }
 
-  const { lang, title, description, ogImage, ogSiteName, ogType, ogUrl } = metaRefs
+  const { lang, title, ogTitle,description, ogImage, ogSiteName, ogType, ogUrl } = metaRefs
 
   useHead({
     htmlAttrs: {
@@ -70,7 +72,7 @@ const _useMetas = (): UseMetas => {
     title,
     meta: [
       { name: 'description', content: description },
-      { property: 'og:title', content: title },
+      { property: 'og:title', content: ogTitle },
       { property: 'og:description', content: description },
       { property: 'og:url', content: ogUrl },
       { property: 'og:image', content: ogImage },
