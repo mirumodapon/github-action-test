@@ -8,7 +8,7 @@ import { TIMEZONE_OFFSET, generateScheduleList, generateScheduleTable, getSchedu
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus, FilterOptions, FilterValue } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
-import io from 'socket.io-client'
+//import io from 'socket.io-client'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Locale } from '@/modules/i18n'
@@ -40,7 +40,7 @@ const _useSession = (): UseSession => {
   const { locale: _locale } = useI18n()
   const locale = computed<Locale>(() => _locale.value as Locale)
 
-  let socket: ReturnType<typeof io> | null = null
+  //let socket: ReturnType<typeof io> | null = null
   const scheduleElements = ref<ScheduleElement[] | null>(null)
   const _sessionsMap = ref<SessionsMap | null>(null)
   const sessionsMap = computed(() => {
@@ -76,13 +76,22 @@ const _useSession = (): UseSession => {
     const { default: _rawData } = await import('@/assets/json/session.json')
     const { scheduleElements: _scheduleElements, sessionsMap: __sessionsMap, roomsMap: _roomsMap } =
       transformRawData(_rawData, TIMEZONE_OFFSET)
+
+    const response = await fetch('https://coscup.1li.tw/api/attendance?token=coscup2024')
+    const response_json = await response.json()
+    console.log(response_json)
+    
+    
     scheduleElements.value = _scheduleElements
     _sessionsMap.value = __sessionsMap
     roomsMap.value = _roomsMap
+    console.log('_sessionsMap',__sessionsMap)
     isClient && await prepareRoomStatus()
     isLoaded.value = true
     filterOptions.value = generateFilterOption(_rawData)
     done()
+    console.log(_scheduleElements,__sessionsMap,_roomsMap)
+    console.log('after done')
   }
 
   isClient && load()
@@ -201,7 +210,10 @@ const _useSession = (): UseSession => {
       Object.keys(roomsMap.value)
         .map(roomId => {
           const isFull = roomsIsFull.value[roomId] ?? false
-          const currentSession = currentSessions.value.find(s => s.room.id === roomId)?.id ?? null
+          console.log('isFull',roomId,isFull)
+          // const currentSession = currentSessions.value.find(s => s.room.id === roomId)?.id ?? null
+          const currentSession = "A79S3H"
+          // return [roomId, { isFull, currentSession } as RoomStatus]
           return [roomId, { isFull, currentSession } as RoomStatus]
         })
     )
@@ -223,20 +235,57 @@ const _useSession = (): UseSession => {
       .filter(s => s.start.getTime() <= currentTime && currentTime <= s.end.getTime())
   }, 3000)
 
+  // async function prepareRoomStatus () {
+  //   const apiEndPoint = import.meta.env.VITE_ROOM_STATUS_API
+  //   if (!apiEndPoint || typeof apiEndPoint !== 'string') return
+  //   if (!socket) {
+  //     socket = io(apiEndPoint)
+  //     socket.emit('data')
+  //   }
+  //   socket.on('data', (data: Record<RoomId, boolean>) => { roomsIsFull.value = data })
+  //   socket.on('update', (diff: Record<RoomId, boolean>) => {
+  //     Object.keys(diff).forEach((key) => {
+  //       roomsIsFull.value[key] = diff[key]
+  //     })
+  //   })
+  // }
+
+
   async function prepareRoomStatus () {
-    const apiEndPoint = import.meta.env.VITE_ROOM_STATUS_API
+    const apiEndPoint = 'https://coscup.1li.tw/api/attendance?token=coscup2024' // 新的 API 端點
     if (!apiEndPoint || typeof apiEndPoint !== 'string') return
-    if (!socket) {
-      socket = io(apiEndPoint)
-      socket.emit('data')
+  
+    try {
+      const response = await fetch(apiEndPoint)
+      const data = await response.json()
+      const attendanceLength = Object.keys(data.attendance)
+
+      // TODO: 
+      // 1. 抓現在的時間
+      // 2. depend 現在的時間，抓符合的 session 們（與 map）
+      // 3. 
+
+
+
+      // if (data.rooms && Array.isArray(data.rooms)) {
+      //   console.log('inside')
+      //   const roomStatus: Record<RoomId, boolean> = {}
+      //   data.rooms.forEach((room: { id: RoomId, isFull: boolean }) => {
+      //     roomStatus[room.id] = room.isFull
+      //   })
+      //   roomsIsFull.value = roomStatus
+      // }
+      const roomStatus: Record<RoomId, boolean> = {}
+      roomStatus['TR612'] = true
+      roomsIsFull.value = roomStatus
+      console.log('roomStatus',roomStatus)
+
+
+    } catch (error) {
+      console.error('Failed to fetch room status:', error)
     }
-    socket.on('data', (data: Record<RoomId, boolean>) => { roomsIsFull.value = data })
-    socket.on('update', (diff: Record<RoomId, boolean>) => {
-      Object.keys(diff).forEach((key) => {
-        roomsIsFull.value[key] = diff[key]
-      })
-    })
   }
+  
 
   return {
     isLoaded,
