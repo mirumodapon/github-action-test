@@ -8,7 +8,7 @@ import { TIMEZONE_OFFSET, generateScheduleList, generateScheduleTable, getSchedu
 import { ScheduleElement, SessionsMap, RoomId, ScheduleTable, ScheduleList, Session, SessionId, RoomsMap, Room, RoomsStatusMap, RoomStatus, FilterOptions, FilterValue } from './types'
 import { fixedTimeZoneDate } from './utils'
 import { useProgress } from '../progress'
-//import io from 'socket.io-client'
+// import io from 'socket.io-client'
 import { useRoute, useRouter } from 'vue-router'
 import { useI18n } from 'vue-i18n'
 import { Locale } from '@/modules/i18n'
@@ -40,7 +40,7 @@ const _useSession = (): UseSession => {
   const { locale: _locale } = useI18n()
   const locale = computed<Locale>(() => _locale.value as Locale)
 
-  //let socket: ReturnType<typeof io> | null = null
+  // let socket: ReturnType<typeof io> | null = null
   const scheduleElements = ref<ScheduleElement[] | null>(null)
   const _sessionsMap = ref<SessionsMap | null>(null)
   const sessionsMap = computed(() => {
@@ -57,13 +57,35 @@ const _useSession = (): UseSession => {
   })
   const roomsMap = ref<RoomsMap | null>(null)
   const roomCapacities: Record<string, number> = {
-    'RB105': 416,'RB101': 50,'RB102': 96,
-    'TR209': 108,'TR210': 60,'TR211': 120,'TR212': 120,'TR213': 120,'TR214': 132,
-    'TR313': 120,
-    'TR409-2': 80,'TR410': 80,'TR411': 60,'TR412-1': 60,'TR412-2': 60,'TR413-1': 60,
-    'TR510': 60,'TR511': 60,'TR512': 60,'TR513': 60,'TR514': 60,
-    'TR609': 60,'TR610': 60,'TR611': 60,'TR613': 60,'TR614': 60,'TR615': 60,'TR616': 60
-  };
+    RB105: 416,
+    RB101: 50,
+    RB102: 96,
+    TR209: 108,
+    TR210: 60,
+    TR211: 120,
+    TR212: 120,
+    TR213: 120,
+    TR214: 132,
+    TR313: 120,
+    'TR409-2': 80,
+    TR410: 80,
+    TR411: 60,
+    'TR412-1': 60,
+    'TR412-2': 60,
+    'TR413-1': 60,
+    TR510: 60,
+    TR511: 60,
+    TR512: 60,
+    TR513: 60,
+    TR514: 60,
+    TR609: 60,
+    TR610: 60,
+    TR611: 60,
+    TR613: 60,
+    TR614: 60,
+    TR615: 60,
+    TR616: 60
+  }
   const isLoaded = ref<boolean>(false)
   const filterOptions = ref<FilterOptions>([])
   const favoriteSessions = (() => {
@@ -84,7 +106,7 @@ const _useSession = (): UseSession => {
     const { default: _rawData } = await import('@/assets/json/session.json')
     const { scheduleElements: _scheduleElements, sessionsMap: __sessionsMap, roomsMap: _roomsMap } =
       transformRawData(_rawData, TIMEZONE_OFFSET)
-    
+
     scheduleElements.value = _scheduleElements
     _sessionsMap.value = __sessionsMap
     roomsMap.value = _roomsMap
@@ -247,49 +269,43 @@ const _useSession = (): UseSession => {
   //   })
   // }
 
-
   async function prepareRoomStatus () {
     const apiEndPoint = 'https://coscup.1li.tw/api/attendance?token=coscup2024'
     if (!apiEndPoint || typeof apiEndPoint !== 'string') return
     try {
       const response = await fetch(apiEndPoint)
-      const api_data = await response.json()
-      //const attendanceLength = Object.keys(data.attendance)
+      const apiData = await response.json()
+      // const attendanceLength = Object.keys(data.attendance)
       const roomStatus: Record<RoomId, boolean> = {}
       // const currentTime = fixedTimeZoneDate(new Date('2024-08-03 10:20'), TIMEZONE_OFFSET).getTime()
       const currentTime = fixedTimeZoneDate(new Date(), TIMEZONE_OFFSET).getTime()
-      if(sessionsMap.value){
-        
+      if (sessionsMap.value) {
         currentSessions.value = Object.values(sessionsMap.value)
-        .filter(s => s.start.getTime() <= currentTime && currentTime <= s.end.getTime())
+          .filter(s => s.start.getTime() <= currentTime && currentTime <= s.end.getTime())
       }
-      
-      
-      if(scheduleElements.value){
+
+      if (scheduleElements.value) {
         for (const element of scheduleElements.value) {
-          const startTime = new Date(element.start);
-          const endTime = new Date(element.end);
+          const startTime = new Date(element.start)
+          const endTime = new Date(element.end)
           if (currentTime >= startTime.getTime() && currentTime <= endTime.getTime()) {
-            const room = element.room;
-            const session = element.session;
-            const attendance = api_data.attendance[session] || 0;
-            const capacity = roomCapacities[room];
+            const room = element.room
+            const session = element.session
+            const attendance = apiData.attendance[session] || 0
+            const capacity = roomCapacities[room]
             if (attendance > capacity) {
-              roomStatus[room] = true;
+              roomStatus[room] = true
             } else {
-              roomStatus[room] = false;
+              roomStatus[room] = false
             }
           }
         }
       }
       roomsIsFull.value = roomStatus
-
-
     } catch (error) {
       console.error('Failed to fetch room status:', error)
     }
   }
-  
 
   return {
     isLoaded,
