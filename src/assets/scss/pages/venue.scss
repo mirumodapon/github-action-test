@@ -28,6 +28,9 @@
 @include venue-theme-colors;
 
 @include page("venue") {
+
+  padding: 20px 0 50px;
+
   .authors {
     max-width: 900px;
     margin: 10px auto;
