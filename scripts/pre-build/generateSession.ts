@@ -177,8 +177,6 @@ function genResult (talks, rooms, speakers) {
     let lang:string | string[]| undefined = tagsMapping[answer]
     lang = lang ? [lang] : []
 
-    if (lang.length === 0) console.log(answer)
-
     return lang
       .concat(s.answers.find(a => a.question.id === SESSION_TAGS_ID) !== undefined ? [s.answers.find(a => a.question.id === SESSION_TAGS_ID).options[0].answer.en] : [])
       .concat(s.tags?.includes('prime session') ? ['Prime'] : [])
