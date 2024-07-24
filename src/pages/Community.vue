@@ -223,7 +223,7 @@ export default defineComponent({
     })))
 
     const detectOverflowContentElements = () => {
-      const elements = Array.from(document.querySelectorAll('#sponsor .content-container'))
+      const elements = Array.from(document.querySelectorAll('#community .content-container'))
       elements.forEach((element) => {
         element.classList.remove('folded')
       })
