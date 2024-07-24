@@ -29,8 +29,10 @@ public/json/sponsor-news.json
 public/json/ytLink.json
 public/json/community.json
 public/json/topics.json
+public/json/fringe.json
 public/images/community/
 public/images/sponsor/
+public/images/fringe/
 public/images/sponsor-news/
 public/sitemap.xml
 src/assets/json/announcement.json
@@ -41,4 +43,5 @@ src/assets/json/sponsor-news.json
 src/assets/json/ytLink.json
 src/assets/json/community.json
 src/assets/json/topics.json
+src/assets/json/fringe.json
 .vite-ssg-temp/

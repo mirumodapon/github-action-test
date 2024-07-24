@@ -12,6 +12,7 @@ import generateStaff from './generateStaff'
 import generateYTLink from './generateYTLink'
 import generateCommunity from './generateCommunity'
 import generateTopics from './generateTopics'
+import generateFringe from './generateFringe'
 
 (async () => {
   const spinner = ora('Strart pre-building...').start()
@@ -24,7 +25,8 @@ import generateTopics from './generateTopics'
       generateSession(),
       generateStaff(),
       generateYTLink(doc),
-      generateTopics(doc, false)
+      generateTopics(doc, false),
+      generateFringe(doc, false)
     ])
     spinner.succeed('Done!')
   } catch (e) {

@@ -48,7 +48,8 @@ export async function getSheetRows<N extends SheetName> (doc: GoogleSpreadsheet,
     community: '630267390',
     partner: '1143151750',
     topics: '1543410901',
-    booths: '784303307'
+    booths: '784303307',
+    fringe: '564182201'
   }
 
   const sheetId = sheetIdMap[sheetName]

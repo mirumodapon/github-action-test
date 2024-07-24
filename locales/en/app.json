@@ -15,7 +15,8 @@
     "coc": "CoC",
     "languageSwitch": "EN",
     "collection": "My Collection",
-    "topics": "Topics and Co-located Events"
+    "topics": "Topics and Co-located Events",
+    "fringe": "Fringe"
   },
   "offline": "Offline mode",
   "footer": {

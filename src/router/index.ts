@@ -115,11 +115,20 @@ const routes: RouteRecordRaw[] = [
     }
   },
   {
+    path: '/fringe',
+    name: 'Fringe',
+    component: () => import('@/pages/Fringe.vue'),
+    meta: {
+      order: 8,
+      hidden: env.VITE_SHOW_FRINGE !== 'true'
+    }
+  },
+  {
     path: '/staff',
     name: 'Staff',
     component: () => import('@/pages/Staff.vue'),
     meta: {
-      order: 8,
+      order: 9,
       hidden: env.VITE_SHOW_STAFF !== 'true'
     }
   },

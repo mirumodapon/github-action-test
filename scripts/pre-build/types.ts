@@ -47,8 +47,11 @@ export type TopicsRow = Record<TopicsRowKeys, string>
 type BoothsRowKeys = 'id' | 'name:zh-TW' | 'name:en' | 'intro:en' | 'intro:zh-TW' | 'link' | 'image' | 'community' | 'room' | 'trackroom'
 export type BoothsRow = Record<BoothsRowKeys, string>
 
-export type SheetName = 'announcement' | 'community' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube' | 'partner' | 'topics' | 'booths'
+export type SheetName = 'announcement' | 'community' | 'sponsorLevel' | 'sponsor' | 'sponsorNews' | 'youtube' | 'partner' | 'topics' | 'booths' | 'fringe'
 export type SheetIdMap = Record<SheetName, string>
+
+export type FringeRowKeys = 'id' | 'title:zh-TW' | 'title:en' | 'description:zh-TW' | 'description:en' | 'link' | 'contact' | 'contact_email' | 'logo'
+export type FringeRow = Record<FringeRowKeys, string>
 
 export type SheetRow<N extends SheetName> = N extends 'announcement'
   ? AnnouncementRow
@@ -64,4 +67,6 @@ export type SheetRow<N extends SheetName> = N extends 'announcement'
             ? TopicsRow
             : N extends 'booths'
               ? BoothsRow
-              : never
+              : N extends 'fringe'
+                ? FringeRow
+                : never
