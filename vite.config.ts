@@ -38,7 +38,8 @@ export default defineConfig(({ mode, command }) => {
           '/venue',
           '/map',
           '/sponsor',
-          '/staff'
+          '/staff',
+          '/fringe'
         ].flatMap(r => [r, `${r}/`])
 
         return Array.from(readdirSync('./locales/'))
