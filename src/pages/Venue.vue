@@ -22,7 +22,7 @@
         <img :src="imagesMap[key]" :alt="`${key} Map`" />
       </a>
     </div>
-    <!-- <a class="download" :href="mapFileUrl" :download="downloadText + '.pdf'">Download</a> -->
+    <a class="download" :href="mapFileUrl" :download="downloadText + '.pdf'">Download</a>
   </main>
 </template>
 
