@@ -5,6 +5,8 @@
       :src="getImageFromAddOns('banner')"
       :alt="t('sponsorship.plan.title')"
     >
+    <section class="markdown overview avoid-page-break" v-html="markdown(t('sponsorship.announceForEnd'))">
+    </section>
     <h2>{{ t('sponsorship.plan.title') }}</h2>
     <section class="markdown overview avoid-page-break">
       <h3>{{ t('sponsorship.overview.title') }}</h3>
