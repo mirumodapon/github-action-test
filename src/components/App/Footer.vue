@@ -76,7 +76,7 @@
             :key="`media-${media.name}`"
             class="media-link"
             target="_blank"
-            rel="noopener"
+            :rel="media.name === 'mastodom'? 'me': 'noopener'"
           >
             <component :is="media.icon"></component>
           </a>
@@ -98,6 +98,7 @@ import IconYoutube from '~icons/fa-brands/youtube'
 import IconTelegram from '~icons/fa-brands/telegram-plane'
 import IconBullhorn from '~icons/fa-solid/bullhorn'
 import IconMedium from '~icons/fa-brands/medium'
+import IconMastodon from '~icons/fa-brands/mastodon'
 
 export default defineComponent({
   name: 'Footer',
@@ -153,6 +154,11 @@ export default defineComponent({
           name: 'medium',
           icon: IconMedium,
           link: 'https://coscup.medium.com'
+        },
+        {
+          name: 'mastodom',
+          icon: IconMastodon,
+          link: 'https://floss.social/@COSCUP'
         }
       ]
     }
