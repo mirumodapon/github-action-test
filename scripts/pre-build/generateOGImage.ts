@@ -50,7 +50,7 @@ interface SomethingById {
 export default async function generateOGImage(){
   return {
     name: 'vite-plugin-generate-og-images',
-    async generateBundle() {
+    async renderStart() {
       console.log('Start OG generating');
       registerFont(path.resolve(__dirname, '../../src/assets/fonts/TaipeiSansTCBeta-Bold/TaipeiSansTCBeta-Bold.ttf'), { family: 'TaipeiSansTCBeta-Bold' });
       // reading session.json
