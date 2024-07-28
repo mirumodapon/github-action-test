@@ -35,6 +35,7 @@ public/images/sponsor/
 public/images/fringe/
 public/images/sponsor-news/
 public/sitemap.xml
+public/images/sessions/*
 src/assets/json/announcement.json
 src/assets/json/session.json
 src/assets/json/staff.json
