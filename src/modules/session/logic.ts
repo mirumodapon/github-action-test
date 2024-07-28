@@ -324,7 +324,7 @@ export function generateSessionMetaOptions (session: Session, locale: Locale): M
     description: escape(truncate(session[locale].description, { length: 80 })),
     ogTitle: session[locale].title,
     ogUrl: `${getRootUrl()}${locale}/session/${session.id}`,
-    ogImage: `${getRootUrl()}/images/sessions/${session.id}.png`,
+    ogImage: `${getRootUrl()}images/sessions/${session.id}.png`,
   }
 }
 
