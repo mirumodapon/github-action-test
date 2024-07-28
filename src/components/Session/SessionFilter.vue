@@ -1,6 +1,6 @@
 <template>
   <article :class="{['session-filter']: true, active: active}">
-    <button class="fab CalendarMultipleCheck" :class="{ active }" @click="checkMySchedule" title="收藏議程時間衝突檢查">
+    <button v-show="isFilterCollection" class="fab CalendarMultipleCheck" :class="{ active }" @click="checkMySchedule" title="收藏議程時間衝突檢查">
       <icon-mdi-calendar-multiple-check />
     </button>
     <template v-if="!isFilterCollection">
