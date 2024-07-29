@@ -270,7 +270,7 @@ const _useSession = (): UseSession => {
   // }
 
   async function prepareRoomStatus () {
-    const apiEndPoint = 'https://coscup.1li.tw/api/attendance?token=coscup2024'
+    const apiEndPoint = 'https://coscup.simbafs.cc/api/attendance?token=coscup2024'
     if (!apiEndPoint || typeof apiEndPoint !== 'string') return
     try {
       const response = await fetch(apiEndPoint)
