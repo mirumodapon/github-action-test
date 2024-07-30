@@ -26,7 +26,7 @@
 	.st20{fill:#ED1B2D;}
 	.st21{fill:#12344C;}
 	.st22{opacity:0.5;fill:url(#SVGID_1_);}
-	.st23{opacity:0.5;fill:url(#SVGID_00000054231144699806613080000001957477003854521473_);}
+	.st23{opacity:0.5;fill:url(#SVGID_00000154413219958368659670000007740044287938874036_);}
 	.st24{fill:#E98025;}
 	.st25{fill:#808080;}
 	.st26{fill:#0071BC;}
@@ -877,14 +877,14 @@
 		</linearGradient>
 		<rect y="440.7" class="st22" width="838.6" height="12.3"/>
 		
-			<linearGradient id="SVGID_00000134239579352607281060000005508940121094448014_" gradientUnits="userSpaceOnUse" x1="0" y1="463.5038" x2="838.5855" y2="463.5038">
+			<linearGradient id="SVGID_00000103961303433183641870000000591227608830606003_" gradientUnits="userSpaceOnUse" x1="0" y1="463.5038" x2="838.5855" y2="463.5038">
 			<stop  offset="0" style="stop-color:#FFFFFF;stop-opacity:0"/>
 			<stop  offset="0.1931" style="stop-color:#D3D3D3"/>
 			<stop  offset="0.8286" style="stop-color:#D9D9D9"/>
 			<stop  offset="0.9951" style="stop-color:#FFFFFF;stop-opacity:0"/>
 		</linearGradient>
 		
-			<rect y="457.4" style="opacity:0.5;fill:url(#SVGID_00000134239579352607281060000005508940121094448014_);" width="838.6" height="12.3"/>
+			<rect y="457.4" style="opacity:0.5;fill:url(#SVGID_00000103961303433183641870000000591227608830606003_);" width="838.6" height="12.3"/>
 	</g>
 	<g>
 		<g>
@@ -1265,7 +1265,7 @@
 	</g>
 	<g id="rBKKI1_00000132060222287186414760000002494149563704987789_">
 		
-			<image style="overflow:visible;" width="360" height="344" id="rBKKI1_00000121250920852601411120000000039028728610131886_" xlink:href="9F0F3226.png"  transform="matrix(7.199042e-02 0 0 7.199042e-02 627.5508 445.5681)">
+			<image style="overflow:visible;" width="360" height="344" id="rBKKI1_00000121250920852601411120000000039028728610131886_" xlink:href="9F0F3220.png"  transform="matrix(7.199042e-02 0 0 7.199042e-02 627.5508 445.5681)">
 		</image>
 	</g>
 	<g>
