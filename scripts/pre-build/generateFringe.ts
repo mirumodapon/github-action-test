@@ -41,7 +41,7 @@ export function transformData (fringe) {
       },
       contact: x.contact,
       email: x.contact_email,
-      logo: `/images/fringe/${x.id}.png`
+      logo: `/2024/images/fringe/${x.id}.png`
     }))
   }
 }
