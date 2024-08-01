@@ -183,13 +183,15 @@ function genResult (talks, rooms, speakers) {
   }
 
   const resSessions = talks.results.map((s :any) => {
+    const language = s.answers.find((a :any) => a.question.id === 216)?.options[0].answer.en
+
     return {
       id: s.code,
       type: resSessionTypes.find((t :any) => s.track?.['zh-tw'] === t.zh.name || s.track?.en === t.en.name)?.id ?? resSessionTypes.find((t :any) => t.zh.name === 'main')?.id,
       room: s.slot.room?.en || s.slot.room?.['zh-tw'],
       start: s.slot.start,
       end: s.slot.end,
-      language: getLanguage(s.content_locale),
+      language,
       zh: {
         title: s.title,
         description: getAnswer(s, SESSION_ZH_DESCRIPTION_ID, s.abstract || '')
