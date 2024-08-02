@@ -1,6 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 import { createCanvas, loadImage, registerFont, CanvasRenderingContext2D } from 'canvas';
+import { Plugin } from 'vite';
 
 interface Session {
     id: string;
@@ -47,9 +48,10 @@ interface SomethingById {
   [id: string]: string;
 }
 
-export default async function generateOGImage(){
+export default async function generateOGImage(): Plugin {
   return {
     name: 'vite-plugin-generate-og-images',
+    apply: 'build',
     async renderStart() {
       console.log('Start OG generating');
       registerFont(path.resolve(__dirname, '../../src/assets/fonts/TaipeiSansTCBeta-Bold/TaipeiSansTCBeta-Bold.ttf'), { family: 'TaipeiSansTCBeta-Bold' });
